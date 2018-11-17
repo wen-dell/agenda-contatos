@@ -1,0 +1,8 @@
+{
+    "mysqlConfig": {
+        "host": "localhost",
+        "user": "wendell",
+        "password": 123,
+        "database": "agenda"
+    }
+}
