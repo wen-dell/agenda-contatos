@@ -1,0 +1,21 @@
+<h5>Meus contatos</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Email</th>
+      <th>Telefone</th>
+      <th>Data de registro</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let contato of contatos">
+      <td>{{ contato.nome }}</td>
+      <td>{{ contato.email }}</td>
+      <td>{{ contato.telefone }}</td>
+      <td>{{ contato.data_registro | date:"dd/MMM/yyyy" }}</td>
+    </tr>
+  </tbody>
+</table>
