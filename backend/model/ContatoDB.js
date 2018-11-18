@@ -7,8 +7,10 @@ class ContatoDB {
 
         let dbConfig = config.get('mysqlConfig');
         let connection = mysql.createConnection(dbConfig);
-
+        
         connection.connect();
+
+        connection.ping();
 
         return connection;
 
@@ -20,7 +22,7 @@ class ContatoDB {
 
             let sql = "select * from contato";
 
-            connection.createQuery(sql, (err, results, fields) => {
+            connection.query(sql, (err, results, fields) => {
 
                 if (err) {
                     reject(err);
@@ -35,14 +37,13 @@ class ContatoDB {
 
     }
 
-    static ContatoById(id) {
+    static getContatoById(id) {
         return new Promise((resolve, reject) => {
             let connection = ContatoDB.connect();
 
             let sql = "select * from contato where id=?";
-            let id = id;
 
-            connection.createQuery(sql, id, (err, results, fields) => {
+            connection.query(sql, id, (err, results, fields) => {
 
                 if (err) {
                     reject(err);
@@ -63,7 +64,7 @@ class ContatoDB {
 
             let sql = "insert into contato set ?";
 
-            connection.createQuery(sql, contato, (err, results, fields) => {
+            connection.query(sql, contato, (err, results, fields) => {
 
                 if (err) {
                     reject(err);
@@ -85,7 +86,7 @@ class ContatoDB {
             let sql = "update contato set ? where id = ?";
             let id = contato.id;
 
-            connection.createQuery(sql, [contato, id], (err, results, fields) => {
+            connection.query(sql, [contato, id], (err, results, fields) => {
 
                 if (err) {
                     reject(err);
@@ -104,9 +105,8 @@ class ContatoDB {
             let connection = ContatoDB.connect();
 
             let sql = "delete from contato where id=?";
-            let id = id;
 
-            connection.createQuery(sql, id, (err, results, fields) => {
+            connection.query(sql, id, (err, results, fields) => {
 
                 if (err) {
                     reject(err);
